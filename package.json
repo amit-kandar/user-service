@@ -4,7 +4,6 @@
   "description": "User service for the application.",
   "main": "index.js",
   "scripts": {
-    "prepare": "husky install",
     "start": "nodemon src/index.ts",
     "build": "tsc",
     "test": "jest --coverage",

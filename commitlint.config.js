@@ -3,5 +3,6 @@ module.exports = {
   rules: {
     'type-enum': [2, 'always', ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'chore']],
     'subject-case': [2, 'always', 'sentence-case'],
+    'header-max-length': [0, 'always', 150],
   },
 };

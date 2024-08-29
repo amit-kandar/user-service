@@ -4,7 +4,6 @@ const prettier = require('prettier');
 const eslintPluginPrettier = require('eslint-plugin-prettier');
 
 module.exports = [
-  // Base TypeScript ESLint configuration
   {
     files: ['src/**/*.ts'],
     languageOptions: {

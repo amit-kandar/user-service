@@ -19,6 +19,7 @@ package-lock.json
 
 # Ignore logs
 *.log
+log/
 
 # Ignore any temporary files created by your editor
 .vscode/
@@ -26,3 +27,6 @@ package-lock.json
 
 # Ignore specific configuration files
 .eslintcache
+
+# Ignore husky
+.husky/

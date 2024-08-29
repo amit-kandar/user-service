@@ -14,8 +14,8 @@
     "test:watch": "jest --watch",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format:check": "prettier --check 'src/**/*.{ts,json,md}'",
-    "format": "prettier --write 'src/**/*.{ts,json,md}'",
+    "format:check": "prettier --check .",
+    "format": "prettier --write .",
     "prepare": "husky install",
     "clean": "rimraf dist"
   },

@@ -1,4 +1,5 @@
 import { createLogger, format, transports, Logger } from 'winston';
+import * as sourceMapSupport from 'source-map-support';
 
 const { combine, timestamp, printf, colorize, json } = format;
 
@@ -8,6 +9,9 @@ interface LogFormat {
   label?: string;
   timestamp?: string;
 }
+
+// linking trace support
+sourceMapSupport.install();
 
 const consoleFormat = printf((info: LogFormat) => {
   const { level, message, timestamp } = info;

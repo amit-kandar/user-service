@@ -7,17 +7,17 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "start": "node dist/index.js",
-    "dev": "nodemon src/index.ts",
+    "start": "cross-env NODE_ENV=production node dist/index.js",
+    "dev": "cross-env NODE_ENV=development nodemon src/index.ts",
     "build": "tsc",
-    "test": "jest --coverage",
+    "test": "cross-env NODE_ENV=test jest --coverage",
     "test:watch": "jest --watch",
-    "lint": "eslint 'src/**/*.{ts,tsx}'",
-    "format": "prettier --write 'src/**/*.{ts,tsx,json,md}'",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format:check": "prettier --check 'src/**/*.{ts,json,md}'",
+    "format": "prettier --write 'src/**/*.{ts,json,md}'",
     "prepare": "husky install",
-    "clean": "rimraf dist",
-    "start:dev": "set NODE_ENV=development && nodemon src/index.ts",
-    "start:prod": "set NODE_ENV=production && node dist/index.js"
+    "clean": "rimraf dist"
   },
   "husky": {
     "hooks": {
@@ -46,7 +46,9 @@
     "cloudinary": "^2.4.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
+    "dotenv-flow": "^4.1.0",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.8.0",

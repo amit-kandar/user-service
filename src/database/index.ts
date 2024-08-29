@@ -1,10 +1,13 @@
 import mongoose from 'mongoose';
 import logger from '../config/logger';
+import config from '../config/config';
 
 export async function connectToDB(): Promise<void> {
+  const MONGODB_USERNAME = config.MONGODB_USERNAME;
+  const MONGODB_PASSWORD = config.MONGODB_PASSWORD;
   try {
     const connectionInstance = await mongoose.connect(
-      `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@userservice.pklpl.mongodb.net/?retryWrites=true&w=majority&appName=userservice`
+      `mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@userservice.pklpl.mongodb.net/?retryWrites=true&w=majority&appName=userservice`
     );
     logger.info(
       `MongoDB Connected: ${connectionInstance.connection.host + '/' + connectionInstance.connection.name}`

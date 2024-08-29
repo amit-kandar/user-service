@@ -24,6 +24,7 @@ module.exports = [
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       semi: ['error', 'always'],
       indent: ['error', 2],
+      'no-console': 'error',
       'prettier/prettier': [
         'error',
         {

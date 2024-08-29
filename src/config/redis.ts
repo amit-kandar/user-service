@@ -1,7 +1,8 @@
 import * as redis from 'redis';
 import logger from './logger';
+import config from './config';
 
-const redisURL = process.env.REDIS_URL || 'redis://localhost:6379';
+const redisURL = config.REDIS_URL || 'redis://localhost:6379';
 
 // Parse Redis URL
 const redisOptions = redisURL.startsWith('redis://')

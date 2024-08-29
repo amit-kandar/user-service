@@ -1,20 +1,16 @@
-import dotenv from 'dotenv';
 import { connectToDB } from './database';
 import { app } from './app';
 import { v2 as cloudinary } from 'cloudinary';
 import logger from './config/logger';
+import config from './config/config';
 
-dotenv.config({
-  path: './.env',
-});
-
-const PORT = process.env.PORT || 4000;
+const PORT = config.PORT;
 
 // Define the configuration parameters
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME || '',
-  api_key: process.env.CLOUDINARY_API_KEY || '',
-  api_secret: process.env.CLOUDINARY_API_SECRET || '',
+  cloud_name: config.CLOUDINARY_CLOUD_NAME,
+  api_key: config.CLOUDINARY_API_KEY,
+  api_secret: config.CLOUDINARY_API_SECRET,
 });
 
 connectToDB()

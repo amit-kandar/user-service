@@ -1,4 +1,4 @@
-import express, { Application } from 'express';
+import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { errorHandler } from './middlewares/errorHandler.middleware';
@@ -27,10 +27,23 @@ redisClient.connect();
 
 // Declare routes
 
-app.use(errorHandler);
-
-app.get('/', (req, res) => {
-  res.status(200).json('Hello World');
+app.get('/health', (req: Request, res: Response) => {
+  res.status(200).json({
+    status: 'UP',
+    timestamp: new Date().toISOString(),
+  });
 });
+
+app.get('/', (req: Request, res: Response) => {
+  res.status(200).json({
+    name: 'My Application',
+    version: '1.0.0',
+    description: 'User authentication service for the application.',
+    author: 'Amit Kandar',
+    status: 'Running',
+  });
+});
+
+app.use(errorHandler);
 
 export { app };

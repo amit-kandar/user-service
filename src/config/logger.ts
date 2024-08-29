@@ -1,6 +1,6 @@
 import { createLogger, format, transports, Logger } from 'winston';
 
-const { combine, timestamp, printf, colorize } = format;
+const { combine, timestamp, printf, colorize, json } = format;
 
 interface LogFormat {
   level: string;
@@ -9,7 +9,7 @@ interface LogFormat {
   timestamp?: string;
 }
 
-const custom_format = printf((info: LogFormat) => {
+const consoleFormat = printf((info: LogFormat) => {
   const { level, message, timestamp } = info;
   return `[${timestamp}] [${level}] ${message}`;
 });
@@ -30,16 +30,29 @@ const customLevels = {
 const developmentLogger = () => {
   return createLogger({
     levels: customLevels.levels,
-    format: combine(
-      colorize({ all: true, colors: customLevels.colors }),
-      timestamp({ format: 'YY-MM-DD HH:MM:SS' }),
-      custom_format
-    ),
+    format: combine(timestamp({ format: 'YY-MM-DD HH:mm:ss' })),
     transports: [
-      new transports.File({ filename: 'logs/error.log', level: 'error' }),
-      new transports.File({ filename: 'logs/warn.log', level: 'warning' }),
-      new transports.File({ filename: 'logs/info.log', level: 'info' }),
-      new transports.Console(),
+      new transports.File({
+        filename: 'logs/error.log',
+        level: 'error',
+        format: json(),
+      }),
+      new transports.File({
+        filename: 'logs/warn.log',
+        level: 'warn',
+        format: json(),
+      }),
+      new transports.File({
+        filename: 'logs/info.log',
+        level: 'info',
+        format: json(),
+      }),
+      new transports.Console({
+        format: combine(
+          colorize({ all: true, colors: customLevels.colors }),
+          consoleFormat
+        ),
+      }),
     ],
   });
 };
@@ -47,16 +60,29 @@ const developmentLogger = () => {
 const productionLogger = () => {
   return createLogger({
     levels: customLevels.levels,
-    format: combine(
-      colorize({ all: true, colors: customLevels.colors }),
-      timestamp(),
-      custom_format
-    ),
+    format: combine(timestamp()),
     transports: [
-      new transports.File({ filename: 'logs/error.log', level: 'error' }),
-      new transports.File({ filename: 'logs/warn.log', level: 'warning' }),
-      new transports.File({ filename: 'logs/info.log', level: 'info' }),
-      new transports.Console(),
+      new transports.File({
+        filename: 'logs/error.log',
+        level: 'error',
+        format: json(),
+      }),
+      new transports.File({
+        filename: 'logs/warn.log',
+        level: 'warn',
+        format: json(),
+      }),
+      new transports.File({
+        filename: 'logs/info.log',
+        level: 'info',
+        format: json(),
+      }),
+      new transports.Console({
+        format: combine(
+          colorize({ all: true, colors: customLevels.colors }),
+          consoleFormat
+        ),
+      }),
     ],
   });
 };

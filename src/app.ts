@@ -3,6 +3,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { errorHandler } from './middlewares/errorHandler.middleware';
 import redisClient from './config/redis';
+import helmet from 'helmet';
 
 const app: Application = express();
 
@@ -12,6 +13,8 @@ app.use(
     credentials: true,
   })
 );
+
+app.use(helmet());
 
 app.use(express.json({ limit: '16kb' }));
 
